@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+# Description: Listens for events on a queue and parses the
+# HTTP response body stored in MongoDB for the given URL.
+#
+# Usage: ruby -rubygems -Ilib bin/parse
+
+require 'beanstalk-client'
+require 'mongomapper'
+require 'feedzirra'
+
+MongoMapper.connection = Mongo::Connection.new(nil, nil, :auto_reconnect => true)
+MongoMapper.database = 'publishing_platform'
+
+require 'feed_processor'
+
+parser = FeedProcessor::Parser.new
+parser.execute
