@@ -19,9 +19,11 @@ Gem::Specification.new do |s|
   s.files = [
     ".gitignore",
      "README.textile",
+     "Rakefile",
      "VERSION",
      "bin/fetch",
      "bin/parse",
+     "feed-processor.gemspec",
      "lib/feed_processor.rb",
      "lib/feed_processor/content.rb",
      "lib/feed_processor/feed.rb",
