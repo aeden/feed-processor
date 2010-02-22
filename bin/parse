@@ -5,14 +5,7 @@
 #
 # Usage: ruby -rubygems -Ilib bin/parse
 
-require 'beanstalk-client'
-require 'mongomapper'
-require 'feedzirra'
-
-MongoMapper.connection = Mongo::Connection.new(nil, nil, :auto_reconnect => true)
-MongoMapper.database = 'publishing_platform'
-
 require 'feed_processor'
-
+require 'feed_processor/parser'
 parser = FeedProcessor::Parser.new
 parser.execute

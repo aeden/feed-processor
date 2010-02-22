@@ -13,18 +13,8 @@
 # * threadify
 # * mongo_mapper
 
-require 'uri'
-require 'http_reactor'
-require 'threadify'
-require 'beanstalk-client'
-require 'mongomapper'
-
 $stdout.sync = true
-
-MongoMapper.connection = Mongo::Connection.new(nil, nil, :auto_reconnect => true)
-MongoMapper.database = 'publishing_platform'
-
 require 'feed_processor'
-
+require 'feed_processor/fetcher'
 fetcher = FeedProcessor::Fetcher.new(:threads => 16)
 fetcher.execute

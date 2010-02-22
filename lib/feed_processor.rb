@@ -1,6 +1,5 @@
 require 'feed_processor/util'
+require 'feed_processor/file_based_request_generator'
 require 'feed_processor/response'
 require 'feed_processor/feed'
 require 'feed_processor/content'
-require 'feed_processor/fetcher'
-require 'feed_processor/parser'

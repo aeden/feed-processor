@@ -1,4 +1,4 @@
-require 'mongomapper'
+require 'mongo_mapper'
 
 class Response
   include MongoMapper::Document

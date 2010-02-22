@@ -4,3 +4,40 @@ There are two steps to the feed processing:
 
 # Step 1: Download feed content using non-blocking IO and insert the raw data into MongoDB. A message is sent via Beanstalk notifying the parser stage that the feed data is ready for a specific feed.
 # Step 2: A multi-processor feed parser pulls the raw data from MongoDB, parses it and inserts the resulting parsed record into MongoDB.
+
+h2. Dependencies
+
+* MongoDB
+* beanstalkd
+* JRuby
+* MRI
+
+Gems (for JRuby):
+
+* jruby-http-reactor
+* threadify
+* beanstalk-client
+* mongo_mapper
+
+Gems (for MRI):
+
+* beanstalk-client
+* mongo_mapper
+* feedzirra
+
+h2. Executing
+
+Each of the following commands should be executed in a separate console or executed to run as a background process.
+
+Start MongoDB and Beanstalk:
+
+  mongod
+  beanstalkd
+
+Run the fetch processor:
+
+  jruby -rubygems -Ilib bin/fetch urls.txt
+
+Run the parse processor:
+
+  ruby -rubygems -Ilib bin/parse
