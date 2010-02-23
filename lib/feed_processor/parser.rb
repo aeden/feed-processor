@@ -32,6 +32,7 @@ module FeedProcessor
               rescue => e
                 puts "error parsing feed #{url}: #{e.message}"
               end
+              response.destroy
             end
           end
           job.delete
