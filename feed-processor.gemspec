@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{feed-processor}
-  s.version = "0.0.1"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Anthony Eden"]
@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
      "lib/feed_processor/feed.rb",
      "lib/feed_processor/fetcher.rb",
      "lib/feed_processor/file_based_request_generator.rb",
+     "lib/feed_processor/mongo_feed_handler.rb",
      "lib/feed_processor/parser.rb",
      "lib/feed_processor/response.rb",
      "lib/feed_processor/util.rb"
