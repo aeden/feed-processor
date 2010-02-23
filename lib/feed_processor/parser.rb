@@ -4,8 +4,11 @@ require 'feedzirra'
 
 module FeedProcessor
   class Parser
+    attr_reader :options
+    
     def initialize(options={})
       @options = options
+      @feed_handler = options[:feed_handler] || FeedProcessor::MongoFeedHandler.new
       setup_mongo(options[:mongo])
     end
     def execute
@@ -25,24 +28,7 @@ module FeedProcessor
             responses.each do |response|
               begin
                 feed = Feedzirra::Feed.parse(response.data)
-                f = Feed.create({:url => url, :status => 'to-process'})
-                entries = feed.entries
-                puts "found #{entries.length} entries in #{url}"
-                entries.each do |entry|
-                  begin
-                    f.contents.create({
-                      :title => entry.title,
-                      :url => entry.url,
-                      :author => entry.author,
-                      :summary => entry.summary,
-                      :content => entry.content,
-                      :published => entry.published,
-                      :categories => entry.categories,
-                    })
-                  rescue => e
-                    puts "error creating entry #{entry.url}: #{e.message}"
-                  end
-                end
+                @feed_handler.process(url, feed)
               rescue => e
                 puts "error parsing feed #{url}: #{e.message}"
               end
